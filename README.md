@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/astro-click-to-source.svg)](https://www.npmjs.com/package/astro-click-to-source)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+![Demo](demo.gif)
+
 An Astro integration that enables click-to-source functionality during development. Hold Alt (or another modifier) and click any element to instantly open its source file in your editor at the exact line and column.
 
 ## Features
