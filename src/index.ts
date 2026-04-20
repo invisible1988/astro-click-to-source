@@ -17,7 +17,7 @@ import type { ActionType, ClickToSourceOptions, ModifierKey } from "./types.js";
 import { clickToSourceVitePlugin } from "./vite-plugin.js";
 
 // Re-export types for consumers
-export type { ClickToSourceOptions, ModifierKey, ActionType };
+export type { ActionType, ClickToSourceOptions, ModifierKey };
 
 /**
  * Creates an Astro integration for click-to-source functionality.

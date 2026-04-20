@@ -9,7 +9,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["node"],
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]

@@ -70,6 +70,9 @@ Set this environment variable to customize the behavior:
 |-------|----------|
 | `code` (default) | Open in VS Code |
 | `cursor` | Open in Cursor |
+| `windsurf` | Open in Windsurf |
+| `antigravity` | Open in Antigravity |
+| `trae` | Open in Trae |
 | `nvim` | Open in Neovim |
 | `vim` | Open in Vim |
 | `webstorm` | Open in WebStorm |
@@ -79,9 +82,14 @@ Set this environment variable to customize the behavior:
 | `atom` | Open in Atom |
 | `clipboard` | Copy path to clipboard instead of opening editor |
 
+> Any CLI command on your `PATH` that accepts a `file:line:column` argument will work — the value is forwarded to [`launch-editor`](https://github.com/yyx990803/launch-editor). So if your editor ships a shell binary (e.g. the `antigravity` command installed by the Antigravity IDE), just set `CLICK_TO_SOURCE` to its name.
+
 ```bash
 # Open in Neovim
 CLICK_TO_SOURCE=nvim npm run dev
+
+# Open in Antigravity IDE
+CLICK_TO_SOURCE=antigravity npm run dev
 
 # Copy to clipboard
 CLICK_TO_SOURCE=clipboard npm run dev
