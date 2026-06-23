@@ -23,6 +23,13 @@ export interface ClickToSourceOptions {
    * @default true
    */
   showHighlight?: boolean;
+
+  /**
+   * Inject `data-astro-source-*` annotations ourselves instead of relying on
+   * Astro's compiler. Astro 7's Rust compiler no longer emits them, so this is
+   * required there. Leave unset to auto-detect (enabled on Astro 7+).
+   */
+  annotate?: boolean;
 }
 
 /**

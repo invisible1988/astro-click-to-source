@@ -5,5 +5,5 @@ export default defineConfig({
   format: ["esm"],
   dts: true,
   clean: true,
-  external: ["astro", "vite", "launch-editor"],
+  external: ["astro", "vite", "launch-editor", "@astrojs/compiler"],
 });

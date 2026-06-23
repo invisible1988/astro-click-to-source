@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 
+# npm pack artifacts
+*.tgz
+
 # IDE
 .idea/
 .vscode/
