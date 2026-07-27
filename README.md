@@ -44,6 +44,7 @@ Then run your dev server and **Alt+Click** (or **Option+Click** on Mac) any elem
 |--------|------|---------|-------------|
 | `modifier` | `'alt' \| 'ctrl' \| 'meta' \| 'shift'` | `'alt'` | Modifier key to hold while clicking |
 | `showHighlight` | `boolean` | `true` | Show visual highlight on hover when modifier is held |
+| `annotate` | `boolean` | _auto_ | Inject `data-astro-source-*` attributes ourselves instead of relying on Astro's compiler. Auto-enabled on Astro 7+ (see [Compatibility](#compatibility)). Leave unset unless you need to force it on or off. |
 
 ### Example with options
 
@@ -97,10 +98,28 @@ CLICK_TO_SOURCE=clipboard npm run dev
 
 ## How It Works
 
-1. **Source Mapping**: Astro adds `data-astro-source-file` and `data-astro-source-loc` attributes to elements in development mode
+1. **Source Mapping**: Elements carry `data-astro-source-file` and `data-astro-source-loc` attributes in development mode. On Astro 4–6 these come from Astro's compiler; on Astro 7+ this integration injects them itself (see [Compatibility](#compatibility))
 2. **Caching**: The integration caches these mappings to survive HMR updates
 3. **Click Handling**: When you Alt+Click, it finds the nearest element with source info
 4. **Editor Opening**: Uses [`launch-editor`](https://github.com/yyx990803/launch-editor) to open your editor at the exact location
+
+## Compatibility
+
+Click-to-source relies on each element carrying a `data-astro-source-file` /
+`data-astro-source-loc` attribute that points back at its position in the
+`.astro` source.
+
+- **Astro 4–6** emit these attributes from the compiler (`@astrojs/compiler`,
+  Go/WASM), so the integration just reads them.
+- **Astro 7** replaced that compiler with the Rust `@astrojs/compiler-rs`,
+  which no longer emits the attributes — so without this integration the
+  feature silently stops working. To fix it, the integration adds a dev-only
+  Vite `load` hook that parses each `.astro` file with the standalone
+  `@astrojs/compiler` and injects the attributes back into the template before
+  Astro compiles it. This is auto-enabled on Astro 7+ and runs only in `astro
+  dev` (production output is untouched).
+
+You can override the auto-detection with the [`annotate`](#options) option.
 
 ## Editor Detection
 
@@ -113,8 +132,8 @@ The integration uses `launch-editor` which automatically detects your editor fro
 
 ## Requirements
 
-- Astro 4.0.0 or higher
-- Node.js 18.17.0 or higher
+- Astro 4, 5, 6, or 7
+- Node.js 18.17.0 or higher (Astro 7 / Vite 8 require Node.js 20.19.0+)
 
 ## License
 
